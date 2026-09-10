@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Angel Martinez Mendez — Cuaderno de trabajo en Ciencia de Datos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f5f6f1;
+    --paper-2:#eceee6;
+    --line:#dadcd2;
+    --ink:#14181a;
+    --ink-soft:#454c4f;
+    --muted:#767f80;
+
+    --teal:#1f5c52;
+    --teal-soft:#e2ede9;
+    --rust:#a8442b;
+    --rust-soft:#f4e5df;
+    --ochre:#93701f;
+    --ochre-soft:#f1ecd8;
+    --indigo:#3d4a72;
+    --indigo-soft:#e6e8f0;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Public Sans', sans-serif;
+    line-height:1.6;
+    font-size:16px;
+  }
+
+  h1,h2,h3{font-family:'Fraunces', serif; color:var(--ink);}
+
+  .mono{font-family:'IBM Plex Mono', monospace; font-variant-numeric:tabular-nums;}
+
+  .wrap{max-width:1040px; margin:0 auto; padding:0 1.75rem;}
+
+  /* ---------- top nav ---------- */
+  nav.topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(245,246,241,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.topbar .wrap{
+    display:flex; align-items:center; gap:1.5rem;
+    padding-top:0.85rem; padding-bottom:0.85rem;
+    overflow-x:auto;
+  }
+  nav.topbar .brand{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem;
+    white-space:nowrap; color:var(--ink);
+  }
+  nav.topbar a{
+    color:var(--ink-soft); text-decoration:none; font-size:0.88rem; font-weight:500;
+    white-space:nowrap; border-bottom:2px solid transparent; padding-bottom:2px;
+  }
+  nav.topbar a:hover, nav.topbar a.active{ color:var(--ink); border-color:var(--rust); }
+
+  /* ---------- hero ---------- */
+  header.hero{ padding:4rem 0 3rem; border-bottom:1px solid var(--line); }
+  .hero-grid{ display:grid; grid-template-columns:1.3fr 0.9fr; gap:3rem; align-items:center; }
+  .hero-kicker{
+    font-size:0.9rem; color:var(--teal); font-weight:600; margin-bottom:0.9rem;
+    display:flex; align-items:center; gap:0.5rem;
+  }
+  .hero-kicker .dot{width:7px; height:7px; border-radius:50%; background:var(--teal); display:inline-block;}
+  h1.hero-title{
+    font-size:2.6rem; font-weight:600; line-height:1.15; letter-spacing:-0.01em;
+    margin-bottom:1.1rem;
+  }
+  .hero-sub{ color:var(--ink-soft); font-size:1.05rem; max-width:46ch; margin-bottom:1.6rem; }
+  .hero-facts{ display:flex; flex-wrap:wrap; gap:1.6rem; }
+  .hero-fact .num{ font-family:'IBM Plex Mono', monospace; font-size:1.3rem; font-weight:600; color:var(--ink); }
+  .hero-fact .label{ font-size:0.8rem; color:var(--muted); }
+
+  .rings-figure{ display:flex; justify-content:center; align-items:center; }
+  .rings-caption{ text-align:center; font-size:0.78rem; color:var(--muted); margin-top:0.6rem; max-width:220px; margin-left:auto; margin-right:auto;}
+
+  /* ---------- section shell ---------- */
+  section.block{ padding:3.4rem 0; border-bottom:1px solid var(--line); }
+  section.block:last-of-type{ border-bottom:none; }
+
+  .section-head{ display:flex; align-items:baseline; gap:0.9rem; margin-bottom:2.1rem; }
+  .section-head .ring-mark{ flex-shrink:0; }
+  .section-head h2{ font-size:1.55rem; font-weight:600; }
+  .section-head p{ color:var(--muted); font-size:0.92rem; margin-top:0.3rem; }
+
+  /* ---------- entries ---------- */
+  .entry{
+    display:grid; grid-template-columns:210px 1fr; gap:2.2rem;
+    padding:1.9rem 0; border-top:1px solid var(--line);
+  }
+  .entry:first-child{ border-top:none; }
+
+  .entry-meta{ font-size:0.83rem; color:var(--muted); }
+  .entry-meta .tag{
+    display:inline-block; font-size:0.76rem; font-weight:600; padding:0.15rem 0.55rem;
+    border-radius:4px; margin-bottom:0.7rem;
+  }
+  .tag-teal{ background:var(--teal-soft); color:var(--teal); }
+  .tag-rust{ background:var(--rust-soft); color:var(--rust); }
+  .tag-ochre{ background:var(--ochre-soft); color:var(--ochre); }
+  .tag-indigo{ background:var(--indigo-soft); color:var(--indigo); }
+
+  .entry-meta .field{ margin-bottom:0.7rem; }
+  .entry-meta .field b{ display:block; color:var(--ink-soft); font-weight:600; font-size:0.78rem; margin-bottom:0.1rem;}
+
+  .entry-body h3{ font-size:1.25rem; margin-bottom:0.6rem; line-height:1.3; }
+  .entry-body p{ color:var(--ink-soft); font-size:0.95rem; margin-bottom:1rem; max-width:64ch; }
+
+  .stat-row{ display:flex; flex-wrap:wrap; gap:1.6rem; margin:1rem 0 1.2rem; }
+  .stat{ min-width:120px; }
+  .stat .v{ font-family:'IBM Plex Mono', monospace; font-size:1.05rem; font-weight:600; color:var(--rust); }
+  .stat .k{ font-size:0.76rem; color:var(--muted); margin-top:0.1rem; }
+
+  .chart-note{ font-size:0.78rem; color:var(--muted); margin-top:0.35rem; }
+
+  .links{ display:flex; flex-wrap:wrap; gap:0.7rem; margin-top:0.6rem; }
+  .lnk{
+    display:inline-flex; align-items:center; gap:0.4rem;
+    font-size:0.85rem; font-weight:600; text-decoration:none;
+    padding:0.5rem 0.9rem; border-radius:6px; border:1px solid var(--line);
+    color:var(--ink); background:var(--paper);
+  }
+  .lnk:hover{ border-color:var(--ink-soft); }
+  .lnk.primary{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .lnk.primary:hover{ background:#000; }
+
+  details.tech{ margin-top:0.9rem; }
+  details.tech summary{
+    cursor:pointer; font-size:0.85rem; font-weight:600; color:var(--ink-soft);
+    list-style:none;
+  }
+  details.tech summary::-webkit-details-marker{ display:none; }
+  details.tech summary::before{ content:"+ "; color:var(--rust); font-weight:700; }
+  details.tech[open] summary::before{ content:"– "; }
+  details.tech .tech-content{
+    margin-top:0.7rem; padding:0.9rem 1.1rem; background:var(--paper-2);
+    border-radius:6px; font-size:0.87rem; color:var(--ink-soft);
+  }
+  details.tech .tech-content p{ margin-bottom:0.5rem; max-width:none; color:var(--ink-soft); }
+  details.tech .tech-content p:last-child{ margin-bottom:0; }
+
+  .inprogress{
+    border:1px dashed var(--ochre); background:var(--ochre-soft);
+    border-radius:8px; padding:1.4rem 1.6rem;
+  }
+  .inprogress h3{ font-size:1.1rem; margin-bottom:0.5rem; }
+  .inprogress p{ color:var(--ink-soft); font-size:0.92rem; margin-bottom:0.5rem; }
+  .progress-bar{ height:6px; background:#e4dcc0; border-radius:99px; overflow:hidden; margin:0.9rem 0; max-width:340px;}
+  .progress-fill{ height:100%; background:var(--ochre); border-radius:99px; }
+
+  footer{ padding:3rem 0 4rem; }
+  footer p{ color:var(--muted); font-size:0.85rem; }
+  footer .foot-edit{ font-size:0.85rem; color:var(--teal); margin-top:0.4rem; }
+
+  @media (max-width: 760px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .rings-figure{ order:-1; margin-bottom:1.5rem; }
+    .entry{ grid-template-columns:1fr; gap:0.9rem; }
+    h1.hero-title{ font-size:2.05rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="wrap">
+    <span class="brand">Angel Martinez Mendez</span>
+    <a href="#series">Series de tiempo</a>
+    <a href="#optimizacion">Optimización</a>
+    <a href="#visualizacion">Dashboards</a>
+    <a href="#dataart">Data art</a>
+    <a href="#estadistica">Estadística aplicada</a>
+    <a href="#encurso">En curso</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-kicker"><span class="dot"></span> Ingeniería en Ciencia de Datos · Universidad Veracruzana, Xalapa</div>
+      <h1 class="hero-title">Un cuaderno de trabajo, no una galería de proyectos terminados.</h1>
+      <p class="hero-sub">Modelación estadística, series de tiempo, algoritmos de optimización y visualización de datos, casi siempre trabajados en equipo, casi siempre con datos abiertos reales: clima, energía, azúcar, incendios, aulas.</p>
+      <div class="hero-facts">
+        <div class="hero-fact"><div class="num">9</div><div class="label">proyectos documentados</div></div>
+        <div class="hero-fact"><div class="num">2015–2026</div><div class="label">periodo de trabajo</div></div>
+        <div class="hero-fact"><div class="num">R · Python</div><div class="label">herramientas principales</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="rings-figure">
+        <svg width="220" height="220" viewBox="0 0 220 220">
+          <circle cx="110" cy="110" r="14" fill="#a8442b"/>
+          <circle cx="110" cy="110" r="30" fill="none" stroke="#1f5c52" stroke-width="6" stroke-opacity="0.85"/>
+          <circle cx="110" cy="110" r="46" fill="none" stroke="#2c7268" stroke-width="6" stroke-opacity="0.7"/>
+          <circle cx="110" cy="110" r="62" fill="none" stroke="#3d8a7d" stroke-width="6" stroke-opacity="0.55"/>
+          <circle cx="110" cy="110" r="78" fill="none" stroke="#5aa596" stroke-width="6" stroke-opacity="0.4" stroke-dasharray="2 4"/>
+          <circle cx="110" cy="110" r="94" fill="none" stroke="#93701f" stroke-width="2" stroke-dasharray="1 5" stroke-opacity="0.6"/>
+        </svg>
+      </div>
+      <p class="rings-caption">Motivo visual tomado de "Anillos del Pacífico", el proyecto de data art del equipo — reutilizado aquí como firma gráfica.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ============ SERIES DE TIEMPO ============ -->
+<section class="block" id="series">
+  <div class="wrap">
+    <div class="section-head">
+      <svg class="ring-mark" width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="3" fill="#1f5c52"/><circle cx="13" cy="13" r="8" fill="none" stroke="#1f5c52" stroke-width="2" stroke-opacity="0.6"/><circle cx="13" cy="13" r="12" fill="none" stroke="#1f5c52" stroke-width="1.5" stroke-opacity="0.3"/></svg>
+      <div>
+        <h2>Series de tiempo</h2>
+        <p>Modelos autorregresivos aplicados a fenómenos con estacionalidad clara: consumo agroindustrial y ciclos climáticos.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="tag tag-teal">Equipo</span>
+        <div class="field"><b>Materia</b>Series de tiempo (Patricia Díaz Gaspar)</div>
+        <div class="field"><b>Con</b>Eidan Juárez, Laura Tonil, Dalia Uscanga</div>
+        <div class="field"><b>Datos</b>CONADESUCA, 168 meses (2012–2025)</div>
+        <div class="field"><b>Herramientas</b>Python, statsmodels, pmdarima</div>
+      </div>
+      <div class="entry-body">
+        <h3>Demanda de azúcar en México: modelación SARIMA y pronóstico</h3>
+        <p>La serie mensual de demanda de azúcar no era estacionaria (ADF, p = .251) y mostraba varianza creciente, así que aplicamos logaritmo natural y diferenciación estacional (D = 1, s = 12) antes de comparar modelos con <span class="mono">auto_arima</span>. Elegimos el más simple entre los que empataban en AIC, siguiendo el criterio de parsimonia de Burnham y Anderson.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="v">SARIMA(1,0,1)(0,1,1)₁₂</div><div class="k">modelo final</div></div>
+          <div class="stat"><div class="v">MAPE 11.26%</div><div class="k">sobre 144 obs. de prueba</div></div>
+          <div class="stat"><div class="v">AIC −134.41</div><div class="k">BIC −122.59</div></div>
+        </div>
+        <svg width="280" height="95" viewBox="0 0 280 95">
+          <polyline points="10,36 34,43 57,24 81,15 105,31 128,45 152,57 176,59 199,77 223,81 246,85 270,65" fill="none" stroke="#1f5c52" stroke-width="2.2"/>
+          <circle cx="81" cy="15" r="3" fill="#a8442b"/>
+          <text x="81" y="9" font-size="9" fill="#a8442b" font-family="IBM Plex Mono" text-anchor="middle">abr 528,978 t</text>
+          <text x="10" y="93" font-size="9" fill="#767f80" font-family="IBM Plex Mono">ene 2026</text>
+          <text x="248" y="93" font-size="9" fill="#767f80" font-family="IBM Plex Mono">dic 2026</text>
+        </svg>
+        <p class="chart-note">Pronóstico puntual enero–diciembre 2026 (toneladas), reconvertido de escala logarítmica. Reproduce el pico estacional del primer trimestre observado desde 2012.</p>
+        <details class="tech">
+          <summary>Diagnóstico y limitaciones</summary>
+          <div class="tech-content">
+            <p>Los tres coeficientes del modelo son significativos (p &lt; .001): AR(1) = 0.850, MA(1) = −0.619, MA estacional₁₂ = −0.854. La prueba ARCH no rechaza homocedasticidad (p = .525), pero Ljung-Box y Jarque-Bera sí detectan autocorrelación residual y no normalidad, atribuibles a un valor atípico extraordinario en 2016 (1,043,563 t, casi el doble de la media histórica) que el modelo no absorbe por completo.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="tag tag-teal">Equipo</span>
+        <div class="field"><b>Con</b>Eidan Juárez, Dalia Uscanga, David Martínez</div>
+        <div class="field"><b>Datos</b>SPC Pacific Data Hub</div>
+        <div class="field"><b>Formato</b>Notebook + mapa interactivo</div>
+      </div>
+      <div class="entry-body">
+        <h3>The Cost of Growing — mapa interactivo de transición energética</h3>
+        <p>Pareja del proyecto de anillos: mismo conjunto de islas del Pacífico, pero aquí el eje es la energía. Un pipeline ARIMA/SARIMA sobre emisiones, anomalías de temperatura, energía renovable y población, más una matriz de correlación de Pearson, alimenta una cartografía interactiva estilo mapa antiguo donde cada isla revela su propia mezcla energética y qué tan lejos está de ser 100% renovable.</p>
+        <p style="font-size:0.88rem; color:var(--muted);">Caso destacado del propio dataset: Tokelau ya genera el 100% de su electricidad con energía solar, mientras buena parte de la región sigue dependiendo más de la hidroeléctrica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPTIMIZACIÓN ============ -->
+<section class="block" id="optimizacion">
+  <div class="wrap">
+    <div class="section-head">
+      <svg class="ring-mark" width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="3" fill="#a8442b"/><circle cx="13" cy="13" r="8" fill="none" stroke="#a8442b" stroke-width="2" stroke-opacity="0.6"/><circle cx="13" cy="13" r="12" fill="none" stroke="#a8442b" stroke-width="1.5" stroke-opacity="0.3"/></svg>
+      <div>
+        <h2>Optimización y algoritmos</h2>
+        <p>Comparar métodos heurísticos entre sí, no solo contra la solución de libro de texto.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="tag tag-rust">Equipo</span>
+        <div class="field"><b>Materia</b>Algoritmos de optimización y simulación</div>
+        <div class="field"><b>Con</b>Dalia Uscanga, Eidan Juárez</div>
+        <div class="field"><b>Datos</b>student_exam_scores (n=200)</div>
+      </div>
+      <div class="entry-body">
+        <h3>Comparación de algoritmos de optimización para el ajuste de un modelo lineal</h3>
+        <p>Estimamos β₀ y β₁ de <span class="mono">exam_score ~ hours_studied</span> con tres métodos heurísticos —búsqueda en profundidad (DFS) sobre un espacio discretizado, ascenso a la colina y un algoritmo genético con elitismo del 25%— y los contrastamos contra el óptimo de mínimos cuadrados (ECM = 18.4). 30 corridas independientes por algoritmo.</p>
+        <svg width="230" height="105" viewBox="0 0 230 105">
+          <line x1="10" y1="69" x2="210" y2="69" stroke="#767f80" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="212" y="72" font-size="8" fill="#767f80" font-family="IBM Plex Mono">MCO 18.4</text>
+          <rect x="25" y="77" width="35" height="8" fill="#1f5c52"/>
+          <rect x="90" y="48" width="35" height="37" fill="#a8442b"/>
+          <rect x="155" y="28" width="35" height="57" fill="#93701f"/>
+          <text x="42" y="98" font-size="9" text-anchor="middle" fill="#454c4f" font-family="IBM Plex Mono">DFS</text>
+          <text x="107" y="98" font-size="9" text-anchor="middle" fill="#454c4f" font-family="IBM Plex Mono">Genético</text>
+          <text x="172" y="98" font-size="9" text-anchor="middle" fill="#454c4f" font-family="IBM Plex Mono">Hill Climb.</text>
+        </svg>
+        <p class="chart-note">Barras a escala de (ECM − 18); más corta es mejor. La línea punteada marca el óptimo teórico de mínimos cuadrados.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="v">DFS: 18.19</div><div class="k">208.6 s · 11,325 nodos · determinista</div></div>
+          <div class="stat"><div class="v">Genético: 18.92</div><div class="k">0.36 s · 50 generaciones</div></div>
+          <div class="stat"><div class="v">Hill Climbing: 19.42</div><div class="k">0.002 s · óptimo local fijo</div></div>
+        </div>
+        <p style="font-size:0.88rem; color:var(--ink-soft);">La búsqueda exhaustiva ganó por precisión pero a un costo temporal 600 veces mayor que el genético; el genético fue el mejor punto medio entre exactitud y tiempo.</p>
+        <div class="links">
+          <a class="lnk" href="https://colab.research.google.com/drive/1AcO1bbfWpnrvaDL4Hf1gO9ZEJHKSetQR?usp=sharing" target="_blank">Colab — DFS</a>
+          <a class="lnk" href="https://colab.research.google.com/drive/1ri2L5sXQfwjtt5IAucue7a0nc53et7qT?usp=sharing" target="_blank">Colab — Hill Climbing</a>
+          <a class="lnk" href="https://colab.research.google.com/drive/1Rrh5GYq3BCvQAj1Vt335VjWGCyiiH_KI?usp=sharing" target="_blank">Colab — Genético</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DASHBOARDS / VISUALIZACIÓN INTERACTIVA ============ -->
+<section class="block" id="visualizacion">
+  <div class="wrap">
+    <div class="section-head">
+      <svg class="ring-mark" width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="3" fill="#93701f"/><circle cx="13" cy="13" r="8" fill="none" stroke="#93701f" stroke-width="2" stroke-opacity="0.6"/><circle cx="13" cy="13" r="12" fill="none" stroke="#93701f" stroke-width="1.5" stroke-opacity="0.3"/></svg>
+      <div>
+        <h2>Dashboards de datos abiertos</h2>
+        <p>Power BI y R como puente entre bases oficiales dispersas y una lectura que se pueda explorar.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="tag tag-ochre">Equipo</span>
+        <div class="field"><b>Con</b>Eidan Juárez, Dalia Uscanga</div>
+        <div class="field"><b>Fuentes</b>INECC, Climate Watch, NASA, NOAA, CEDS, IEA</div>
+        <div class="field"><b>Periodo</b>2015–2023</div>
+      </div>
+      <div class="entry-body">
+        <h3>Dashboard ODS 13: acción por el clima en México</h3>
+        <p>Un dashboard en Power BI sobre las metas 13.1, 13.3, 13n.1 y 13n.2, con tres modelos inferenciales en R por detrás: tendencia temporal de CO₂, relación CO₂–temperatura y correlación de Pearson.</p>
+        <svg width="280" height="95" viewBox="0 0 280 95">
+          <polyline points="10,19 43,15 75,15 108,34 140,29 173,85 205,78 238,46 270,30" fill="none" stroke="#93701f" stroke-width="2.2"/>
+          <text x="10" y="93" font-size="9" fill="#767f80" font-family="IBM Plex Mono">2015</text>
+          <text x="250" y="93" font-size="9" fill="#767f80" font-family="IBM Plex Mono">2023</text>
+          <text x="173" y="79" font-size="9" fill="#a8442b" font-family="IBM Plex Mono" text-anchor="middle">2020 · 380 Mt</text>
+        </svg>
+        <p class="chart-note">Emisiones totales de CO₂ (MtCO₂), 2015–2023. La caída de 2020 fue coyuntural — para 2023 el sector eléctrico ya emitía más que nunca.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="v">β₁ = −0.063, p = .0023</div><div class="k">tendencia de CO₂ (R² = .756)</div></div>
+          <div class="stat"><div class="v">r = −0.481, p = .19</div><div class="k">CO₂ vs. temperatura, no significativa</div></div>
+          <div class="stat"><div class="v">SUS 70.0 / 100</div><div class="k">usabilidad, "aceptable"</div></div>
+        </div>
+        <div class="links">
+          <a class="lnk primary" href="https://app.powerbi.com/view?r=eyJrIjoiZDNmN2YxNmItZDUxOS00NDFlLWJjZDYtNzU5ZThiOTkyMWI3IiwidCI6IjNjOTA3NjUxLWQ4YzYtNGNhNi1hOGE0LTZhMjQyNDMwZTY1MyIsImMiOjR9&embedImagePlaceholder=true&pageName=f8e6cbb3dc25ad3067bd" target="_blank">Abrir dashboard</a>
+        </div>
+        <details class="tech">
+          <summary>Sobre la relación CO₂–temperatura</summary>
+          <div class="tech-content">
+            <p>Con solo 9 años de observaciones anuales, el poder estadístico es bajo y el resultado no significativo es esperable: el cambio climático opera con inercia y rezagos de décadas, no de años. Lo tratamos como un límite del diseño, no como evidencia de ausencia de relación.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="tag tag-ochre">Equipo</span>
+        <div class="field"><b>Con</b>Eidan Juárez, Dalia Uscanga</div>
+        <div class="field"><b>Evento</b>Día de los Datos Abiertos, FEI-UV, 2026</div>
+        <div class="field"><b>Fuentes</b>NASA FIRMS, GES DISC, FLEXPART, NACP</div>
+      </div>
+      <div class="entry-body">
+        <h3>Monitoreo ambiental integrado con datos satelitales de la NASA</h3>
+        <p>Cuatro bases de la NASA que no comparten periodo ni formato —incendios (VIIRS), metano por sector, ozono atmosférico y salud forestal (NEE)— procesadas en R con <span class="mono">ncdf4</span> y unidas espacialmente sobre el territorio mexicano en un dashboard de seis hojas.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="v">~1,000,000</div><div class="k">focos de calor, 2021–2024</div></div>
+          <div class="stat"><div class="v">8.73 MW</div><div class="k">potencia radiativa media del fuego</div></div>
+          <div class="stat"><div class="v">45.25%</div><div class="k">del metano viene de ganadería</div></div>
+        </div>
+        <p style="font-size:0.88rem; color:var(--ink-soft);">El pico de incendios cae en abril–mayo y se concentra en el sur del país; mayo coincide, además, con la mayor concentración de ozono registrada — una asociación temporal que el proyecto señala sin poder probar causalidad, por la falta de periodos comunes entre bases.</p>
+        <div class="links">
+          <a class="lnk primary" href="https://app.powerbi.com/view?r=eyJrIjoiOTVkZGY5NDYtZmY0Ni00ZmE2LTg4NWEtYmQwMTNjZmEwZjNmIiwidCI6IjNjOTA3NjUxLWQ4YzYtNGNhNi1hOGE0LTZhMjQyNDMwZTY1MyIsImMiOjR9" target="_blank">Abrir dashboard</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DATA ART ============ -->
+<section class="block" id="dataart">
+  <div class="wrap">
+    <div class="section-head">
+      <svg class="ring-mark" width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="3" fill="#3d4a72"/><circle cx="13" cy="13" r="8" fill="none" stroke="#3d4a72" stroke-width="2" stroke-opacity="0.6"/><circle cx="13" cy="13" r="12" fill="none" stroke="#3d4a72" stroke-width="1.5" stroke-opacity="0.3"/></svg>
+      <div>
+        <h2>Visualización de datos como forma, no solo como gráfico</h2>
+        <p>Cuando el patrón importa más que el número exacto.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="tag tag-indigo">Equipo</span>
+        <div class="field"><b>Con</b>Eidan Juárez, Dalia Uscanga, David Martínez</div>
+        <div class="field"><b>Reto</b>Pacific Dataviz Challenge</div>
+        <div class="field"><b>Fuente</b>Pacific DataHub</div>
+        <div class="field"><b>Herramientas</b>R, Python (matplotlib)</div>
+      </div>
+      <div class="entry-body">
+        <h3>Every Island Leaves a Different Ring in the Same Sea</h3>
+        <p>Diecisiete territorios del Pacífico, cada uno como un conjunto de anillos concéntricos construidos año por año, de 2000 a 2023: el tono del anillo marca la anomalía de temperatura del mar, su borde ondulado la precipitación, un halo punteado el cambio en el nivel del mar, y el núcleo las emisiones per cápita. En vez de un gráfico por variable, cada isla queda como una huella climática propia, comparable de un vistazo con la de sus vecinas.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="v">+1.1 °C</div><div class="k">anomalía máxima registrada, 2000–2023</div></div>
+          <div class="stat"><div class="v">9 / 17</div><div class="k">islas pasaron de bajo/moderado a severo</div></div>
+          <div class="stat"><div class="v">10 / 17</div><div class="k">islas en categoría severa para 2023</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ESTADÍSTICA APLICADA ============ -->
+<section class="block" id="estadistica">
+  <div class="wrap">
+    <div class="section-head">
+      <svg class="ring-mark" width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="3" fill="#1f5c52"/><circle cx="13" cy="13" r="8" fill="none" stroke="#1f5c52" stroke-width="2" stroke-opacity="0.6"/><circle cx="13" cy="13" r="12" fill="none" stroke="#1f5c52" stroke-width="1.5" stroke-opacity="0.3"/></svg>
+      <div>
+        <h2>Estadística aplicada</h2>
+        <p>Encuestas propias, sobre compañeros y aulas reales de la Facultad.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="tag tag-teal">Equipo</span>
+        <div class="field"><b>Con</b>Eidan Juárez, Dalia Uscanga, Dr. Juan Ruiz</div>
+        <div class="field"><b>Muestra</b>n = 62, FEI-UV</div>
+        <div class="field"><b>Presentado en</b>XV Foro de Estadística</div>
+      </div>
+      <div class="entry-body">
+        <h3>Estilo de vida y rendimiento académico en Ciencia de Datos</h3>
+        <p>Con el instrumento FANTASTIC aplicado a estudiantes de 2° y 4° semestre, comparamos hábitos de descanso, uso de tecnología y promedio escolar mediante pruebas de Mann-Whitney y correlación de Spearman.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="v">r = −0.27, p = .034</div><div class="k">uso de tecnología vs. promedio</div></div>
+          <div class="stat"><div class="v">p &lt; .05</div><div class="k">diferencias entre semestres (Mann-Whitney)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="tag tag-teal">Equipo</span>
+        <div class="field"><b>Con</b>Eidan Juárez, Dalia Uscanga, Jesús Hernández</div>
+        <div class="field"><b>Muestra</b>n = 1,099</div>
+        <div class="field"><b>Método</b>Regresión logística</div>
+      </div>
+      <div class="entry-body">
+        <h3>Modelo predictivo del bienestar emocional en universitarios</h3>
+        <p>Un modelo de detección temprana de riesgo emocional alto, construido sobre estrés, ansiedad y hábitos de sueño autorreportados.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="v">AUC = 0.76</div><div class="k">exactitud 61%</div></div>
+          <div class="stat"><div class="v">Sens. 0.69 / Esp. 0.70</div><div class="k">punto de corte del clasificador</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EN CURSO ============ -->
+<section class="block" id="encurso">
+  <div class="wrap">
+    <div class="section-head">
+      <svg class="ring-mark" width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="3" fill="#93701f" fill-opacity="0.6"/><circle cx="13" cy="13" r="8" fill="none" stroke="#93701f" stroke-width="2" stroke-dasharray="2 3" stroke-opacity="0.7"/></svg>
+      <div>
+        <h2>En curso</h2>
+        <p>Lo que todavía no está terminado, mostrado como tal.</p>
+      </div>
+    </div>
+
+    <div class="inprogress">
+      <h3>Revisión sistemática: IA y dependencia tecnológica en el aprendizaje universitario</h3>
+      <p>Protocolo PRISMA 2020. Búsqueda ejecutada en SciELO (34 registros) y Dialnet (88 iniciales, 66 tras filtrar por tipo de documento). El filtrado por título ya redujo el conjunto de 88 a 70 artículos; sigue pendiente el cribado por resumen y, después, la lectura a texto completo para la fase de elegibilidad.</p>
+      <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>
+      <p style="font-size:0.82rem; color:var(--muted);">Identificación completa · Cribado en proceso · Elegibilidad y síntesis pendientes</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Portafolio de evidencias técnicas · Ingeniería en Ciencia de Datos, Facultad de Estadística e Informática, Universidad Veracruzana, Xalapa.</p>
+    <p class="foot-edit">Agrega aquí tu correo, LinkedIn o GitHub cuando quieras publicarlo.</p>
+  </div>
+</footer>
+
+<script>
+  const links = document.querySelectorAll('nav.topbar a');
+  const sections = [...links].map(l => document.querySelector(l.getAttribute('href')));
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        const id = '#' + e.target.id;
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => s && obs.observe(s));
+</script>
+
+</body>
+</html>
