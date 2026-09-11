@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Angel Martinez Mendez — Cuaderno de trabajo en Ciencia de Datos</title>
+<meta name="description" content="Portafolio de evidencias técnicas de Angel Martinez Mendez — series de tiempo, optimización, aprendizaje automático, dashboards y visualización de datos." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='13' cy='13' r='3' fill='%23a8442b'/%3E%3Ccircle cx='13' cy='13' r='8' fill='none' stroke='%231f5c52' stroke-width='2' stroke-opacity='0.7'/%3E%3Ccircle cx='13' cy='13' r='12' fill='none' stroke='%2393701f' stroke-width='1.5' stroke-opacity='0.4'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -84,7 +86,6 @@
   .hero-fact .label{ font-size:0.8rem; color:var(--muted); }
 
   .rings-figure{ display:flex; justify-content:center; align-items:center; }
-  .rings-caption{ text-align:center; font-size:0.78rem; color:var(--muted); margin-top:0.6rem; max-width:220px; margin-left:auto; margin-right:auto;}
 
   /* ---------- section shell ---------- */
   section.block{ padding:3.4rem 0; border-bottom:1px solid var(--line); }
@@ -114,6 +115,8 @@
 
   .entry-meta .field{ margin-bottom:0.7rem; }
   .entry-meta .field b{ display:block; color:var(--ink-soft); font-weight:600; font-size:0.78rem; margin-bottom:0.1rem;}
+  .entry-meta .field a{ color:var(--ink-soft); text-decoration-color:var(--line); text-underline-offset:2px; }
+  .entry-meta .field a:hover{ color:var(--teal); text-decoration-color:var(--teal); }
 
   .entry-body h3{ font-size:1.25rem; margin-bottom:0.6rem; line-height:1.3; }
   .entry-body p{ color:var(--ink-soft); font-size:0.95rem; margin-bottom:1rem; max-width:64ch; }
@@ -160,15 +163,38 @@
   .progress-bar{ height:6px; background:#e4dcc0; border-radius:99px; overflow:hidden; margin:0.9rem 0; max-width:340px;}
   .progress-fill{ height:100%; background:var(--ochre); border-radius:99px; }
 
-  footer{ padding:3rem 0 4rem; }
-  footer p{ color:var(--muted); font-size:0.85rem; }
+  footer{ padding:3rem 0 4rem; border-top:1px solid var(--line); margin-top:0.5rem; }
+  footer p{ color:var(--muted); font-size:0.85rem; max-width:56ch; }
   footer .foot-edit{ font-size:0.85rem; color:var(--teal); margin-top:0.4rem; }
+  footer .foot-edit a{ color:var(--teal); font-weight:600; }
+  .footer-grid{ display:flex; align-items:center; justify-content:space-between; gap:2rem; }
+  @media (max-width:600px){ .footer-grid{ flex-direction:column-reverse; align-items:flex-start; } }
+
+  a:focus-visible, button:focus-visible, summary:focus-visible{
+    outline:2px solid var(--rust); outline-offset:3px; border-radius:3px;
+  }
+
+  ::selection{ background:var(--teal); color:var(--paper); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+  }
+
+  @media (max-width: 900px){
+    .entry{ grid-template-columns:170px 1fr; gap:1.5rem; }
+  }
 
   @media (max-width: 760px){
     .hero-grid{ grid-template-columns:1fr; }
     .rings-figure{ order:-1; margin-bottom:1.5rem; }
     .entry{ grid-template-columns:1fr; gap:0.9rem; }
     h1.hero-title{ font-size:2.05rem; }
+  }
+
+  @media print{
+    nav.topbar{ position:static; }
+    .links, script{ display:none; }
   }
 </style>
 </head>
@@ -179,6 +205,7 @@
     <span class="brand">Angel Martinez Mendez</span>
     <a href="#series">Series de tiempo</a>
     <a href="#optimizacion">Optimización</a>
+    <a href="#ml">Aprendizaje automático</a>
     <a href="#visualizacion">Dashboards</a>
     <a href="#dataart">Data art</a>
     <a href="#estadistica">Estadística aplicada</a>
@@ -193,8 +220,8 @@
       <h1 class="hero-title">Un cuaderno de trabajo, no una galería de proyectos terminados.</h1>
       <p class="hero-sub">Modelación estadística, series de tiempo, algoritmos de optimización y visualización de datos, casi siempre trabajados en equipo, casi siempre con datos abiertos reales: clima, energía, azúcar, incendios, aulas.</p>
       <div class="hero-facts">
-        <div class="hero-fact"><div class="num">9</div><div class="label">proyectos documentados</div></div>
-        <div class="hero-fact"><div class="num">2015–2026</div><div class="label">periodo de trabajo</div></div>
+        <div class="hero-fact"><div class="num">10</div><div class="label">proyectos documentados</div></div>
+        <div class="hero-fact"><div class="num">2025–2026</div><div class="label">periodo de trabajo</div></div>
         <div class="hero-fact"><div class="num">R · Python</div><div class="label">herramientas principales</div></div>
       </div>
     </div>
@@ -209,7 +236,6 @@
           <circle cx="110" cy="110" r="94" fill="none" stroke="#93701f" stroke-width="2" stroke-dasharray="1 5" stroke-opacity="0.6"/>
         </svg>
       </div>
-      <p class="rings-caption">Motivo visual tomado de "Anillos del Pacífico", el proyecto de data art del equipo — reutilizado aquí como firma gráfica.</p>
     </div>
   </div>
 </header>
@@ -229,7 +255,7 @@
       <div class="entry-meta">
         <span class="tag tag-teal">Equipo</span>
         <div class="field"><b>Materia</b>Series de tiempo (Patricia Díaz Gaspar)</div>
-        <div class="field"><b>Con</b>Eidan Juárez, Laura Tonil, Dalia Uscanga</div>
+        <div class="field"><b>Con</b>Eidan Juárez, Laura Tonil, <a href="https://github.com/daabius" target="_blank" rel="noopener">Dalia Uscanga</a></div>
         <div class="field"><b>Datos</b>CONADESUCA, 168 meses (2012–2025)</div>
         <div class="field"><b>Herramientas</b>Python, statsmodels, pmdarima</div>
       </div>
@@ -261,14 +287,22 @@
     <div class="entry">
       <div class="entry-meta">
         <span class="tag tag-teal">Equipo</span>
-        <div class="field"><b>Con</b>Eidan Juárez, Dalia Uscanga, David Martínez</div>
+        <div class="field"><b>Con</b>Eidan Juárez, <a href="https://github.com/daabius" target="_blank" rel="noopener">Dalia Uscanga</a>, David Martínez</div>
         <div class="field"><b>Datos</b>SPC Pacific Data Hub</div>
         <div class="field"><b>Formato</b>Notebook + mapa interactivo</div>
       </div>
       <div class="entry-body">
         <h3>The Cost of Growing — mapa interactivo de transición energética</h3>
-        <p>Pareja del proyecto de anillos: mismo conjunto de islas del Pacífico, pero aquí el eje es la energía. Un pipeline ARIMA/SARIMA sobre emisiones, anomalías de temperatura, energía renovable y población, más una matriz de correlación de Pearson, alimenta una cartografía interactiva estilo mapa antiguo donde cada isla revela su propia mezcla energética y qué tan lejos está de ser 100% renovable.</p>
-        <p style="font-size:0.88rem; color:var(--muted);">Caso destacado del propio dataset: Tokelau ya genera el 100% de su electricidad con energía solar, mientras buena parte de la región sigue dependiendo más de la hidroeléctrica.</p>
+        <p>Es fácil imaginar la transición energética del Pacífico como una sola historia compartida, pero ese promedio regional esconde realidades muy distintas: Tokelau, con apenas 1,500 habitantes, ya genera el 100% de su electricidad con energía solar, mientras buena parte de la región sigue dependiendo más del petróleo importado que de cualquier fuente limpia. Una cartografía interactiva estilo mapa antiguo invita a recorrer el Pacífico isla por isla y descubrir su fuente de energía dominante, qué tan lejos está de ser 100% renovable, cuánto emite por persona y cómo esa transición avanza —o no— frente al crecimiento de su población.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="v">25.7%</div><div class="k">renovable del total regional acumulado, 2000–2023</div></div>
+          <div class="stat"><div class="v">143,274 GWh</div><div class="k">generados con petróleo/diésel, la fuente dominante</div></div>
+          <div class="stat"><div class="v">r = −0.17</div><div class="k">% renovable vs. emisiones per cápita (débil)</div></div>
+        </div>
+        <p style="font-size:0.88rem; color:var(--muted);">Caso destacado del propio dataset: Tokelau ya genera prácticamente el 100% de su electricidad con energía solar desde 2012, primer territorio del mundo en lograrlo.</p>
+        <div class="links">
+          <a class="lnk primary" href="https://angelzzz123.github.io/PacificDatavizChallenge2026/" target="_blank">Ver visualización</a>
+        </div>
       </div>
     </div>
   </div>
@@ -289,7 +323,7 @@
       <div class="entry-meta">
         <span class="tag tag-rust">Equipo</span>
         <div class="field"><b>Materia</b>Algoritmos de optimización y simulación</div>
-        <div class="field"><b>Con</b>Dalia Uscanga, Eidan Juárez</div>
+        <div class="field"><b>Con</b><a href="https://github.com/daabius" target="_blank" rel="noopener">Dalia Uscanga</a>, Eidan Juárez</div>
         <div class="field"><b>Datos</b>student_exam_scores (n=200)</div>
       </div>
       <div class="entry-body">
@@ -322,6 +356,44 @@
   </div>
 </section>
 
+<!-- ============ APRENDIZAJE AUTOMÁTICO ============ -->
+<section class="block" id="ml">
+  <div class="wrap">
+    <div class="section-head">
+      <svg class="ring-mark" width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="3" fill="#3d4a72"/><circle cx="13" cy="13" r="8" fill="none" stroke="#3d4a72" stroke-width="2" stroke-opacity="0.6"/><circle cx="13" cy="13" r="12" fill="none" stroke="#3d4a72" stroke-width="1.5" stroke-opacity="0.3"/></svg>
+      <div>
+        <h2>Aprendizaje automático</h2>
+        <p>Clasificación supervisada sobre encuestas poblacionales, con clases desbalanceadas de por medio.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <span class="tag tag-indigo">Equipo</span>
+        <div class="field"><b>Con</b>Eidan Juárez, <a href="https://github.com/daabius" target="_blank" rel="noopener">Dalia Uscanga</a></div>
+        <div class="field"><b>Datos</b>ENCODAT 2025 (n=14,113)</div>
+        <div class="field"><b>Balanceo</b>SMOTE / ponderación de clases</div>
+      </div>
+      <div class="entry-body">
+        <h3>Predicción del consumo de mariguana y productos con THC</h3>
+        <p>Con datos sociodemográficos, laborales, de exposición a drogas y de tolerancia social de la Encuesta Nacional de Consumo de Drogas, Alcohol y Tabaco 2025, comparamos un árbol de decisión balanceado con SMOTE contra una regresión logística con ponderación de clases (<span class="mono">class_weight='balanced'</span>, ElasticNet) para predecir el antecedente de consumo.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="v">Árbol: 0.840 exact.</div><div class="k">sens. 0.405 · esp. 0.906</div></div>
+          <div class="stat"><div class="v">Log. reg.: 0.781 exact.</div><div class="k">sens. 0.716 · AUC 0.820</div></div>
+          <div class="stat"><div class="v">OR = 0.43</div><div class="k">haber recibido oferta de drogas (ed1)</div></div>
+        </div>
+        <p style="font-size:0.88rem; color:var(--ink-soft);">El árbol gana en exactitud y especificidad; la regresión logística detecta casi el doble de consumidores reales (265 vs. 150 de 370 en prueba) — en un contexto de salud pública, esa sensibilidad pesa más que la exactitud global.</p>
+        <details class="tech">
+          <summary>Variables y limitaciones</summary>
+          <div class="tech-content">
+            <p>En el árbol (profundidad 12, criterio gini, validación cruzada de 5 pliegues), tres variables concentran el 77.7% de la importancia: haber recibido oferta de drogas (58.1%), sexo (12.5%) y edad (7.2%). En la regresión, la penalización ElasticNet anuló cuatro predictores sin capacidad discriminativa. El estudio se basa solo en variables disponibles en la encuesta — factores de salud mental, entorno familiar y consumo previo de otras sustancias, documentados en la literatura como relevantes, no fueron incluidos.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ DASHBOARDS / VISUALIZACIÓN INTERACTIVA ============ -->
 <section class="block" id="visualizacion">
   <div class="wrap">
@@ -336,7 +408,7 @@
     <div class="entry">
       <div class="entry-meta">
         <span class="tag tag-ochre">Equipo</span>
-        <div class="field"><b>Con</b>Eidan Juárez, Dalia Uscanga</div>
+        <div class="field"><b>Con</b>Eidan Juárez, <a href="https://github.com/daabius" target="_blank" rel="noopener">Dalia Uscanga</a></div>
         <div class="field"><b>Fuentes</b>INECC, Climate Watch, NASA, NOAA, CEDS, IEA</div>
         <div class="field"><b>Periodo</b>2015–2023</div>
       </div>
@@ -370,7 +442,7 @@
     <div class="entry">
       <div class="entry-meta">
         <span class="tag tag-ochre">Equipo</span>
-        <div class="field"><b>Con</b>Eidan Juárez, Dalia Uscanga</div>
+        <div class="field"><b>Con</b>Eidan Juárez, <a href="https://github.com/daabius" target="_blank" rel="noopener">Dalia Uscanga</a></div>
         <div class="field"><b>Evento</b>Día de los Datos Abiertos, FEI-UV, 2026</div>
         <div class="field"><b>Fuentes</b>NASA FIRMS, GES DISC, FLEXPART, NACP</div>
       </div>
@@ -405,19 +477,20 @@
     <div class="entry">
       <div class="entry-meta">
         <span class="tag tag-indigo">Equipo</span>
-        <div class="field"><b>Con</b>Eidan Juárez, Dalia Uscanga, David Martínez</div>
+        <div class="field"><b>Con</b>Eidan Juárez, <a href="https://github.com/daabius" target="_blank" rel="noopener">Dalia Uscanga</a>, David Martínez</div>
         <div class="field"><b>Reto</b>Pacific Dataviz Challenge</div>
         <div class="field"><b>Fuente</b>Pacific DataHub</div>
-        <div class="field"><b>Herramientas</b>R, Python (matplotlib)</div>
+        <div class="field"><b>Formato</b>Infografía estática</div>
       </div>
       <div class="entry-body">
         <h3>Every Island Leaves a Different Ring in the Same Sea</h3>
-        <p>Diecisiete territorios del Pacífico, cada uno como un conjunto de anillos concéntricos construidos año por año, de 2000 a 2023: el tono del anillo marca la anomalía de temperatura del mar, su borde ondulado la precipitación, un halo punteado el cambio en el nivel del mar, y el núcleo las emisiones per cápita. En vez de un gráfico por variable, cada isla queda como una huella climática propia, comparable de un vistazo con la de sus vecinas.</p>
+        <p>Cada isla del Pacífico ha vivido su propia versión del cambio climático: unas ven su mar calentarse más rápido, otras sufren lluvias cada vez más erráticas, otras pierden terreno frente al mar. Separar cada síntoma en su propio gráfico pierde algo esencial — que le ocurren a la misma isla, al mismo tiempo. Aquí, diecisiete territorios se representan como anillos concéntricos, uno por año de 2000 a 2023: el núcleo marca las emisiones per cápita, el tono de cada anillo la anomalía de temperatura del mar de ese año, su borde ondulado la anomalía de precipitación, y un halo punteado en el borde exterior el cambio en el nivel del mar entre 2000 y 2023. El resultado es una huella climática irrepetible por isla, comparable de un vistazo con la de sus vecinas.</p>
         <div class="stat-row">
-          <div class="stat"><div class="v">+1.1 °C</div><div class="k">anomalía máxima registrada, 2000–2023</div></div>
-          <div class="stat"><div class="v">9 / 17</div><div class="k">islas pasaron de bajo/moderado a severo</div></div>
-          <div class="stat"><div class="v">10 / 17</div><div class="k">islas en categoría severa para 2023</div></div>
+          <div class="stat"><div class="v">+1.1 °C</div><div class="k">anomalía máxima de temperatura del mar, 2000–2023</div></div>
+          <div class="stat"><div class="v">9 / 17</div><div class="k">islas pasaron de anomalía baja/moderada a severa</div></div>
+          <div class="stat"><div class="v">10 / 17</div><div class="k">islas ya en categoría severa (≥0.6 °C) para 2023</div></div>
         </div>
+        <p style="font-size:0.88rem; color:var(--ink-soft);">Al desplegar los anillos de las 17 islas en una sola línea de tiempo se ve cómo todo el océano cruzó el umbral térmico: en 2000 las anomalías se repartían de forma pareja entre categorías, y hacia la segunda mitad del periodo las categorías más altas pasaron a dominar.</p>
       </div>
     </div>
   </div>
@@ -437,7 +510,7 @@
     <div class="entry">
       <div class="entry-meta">
         <span class="tag tag-teal">Equipo</span>
-        <div class="field"><b>Con</b>Eidan Juárez, Dalia Uscanga, Dr. Juan Ruiz</div>
+        <div class="field"><b>Con</b>Eidan Juárez, <a href="https://github.com/daabius" target="_blank" rel="noopener">Dalia Uscanga</a>, Dr. Juan Ruiz</div>
         <div class="field"><b>Muestra</b>n = 62, FEI-UV</div>
         <div class="field"><b>Presentado en</b>XV Foro de Estadística</div>
       </div>
@@ -454,7 +527,7 @@
     <div class="entry">
       <div class="entry-meta">
         <span class="tag tag-teal">Equipo</span>
-        <div class="field"><b>Con</b>Eidan Juárez, Dalia Uscanga, Jesús Hernández</div>
+        <div class="field"><b>Con</b>Eidan Juárez, <a href="https://github.com/daabius" target="_blank" rel="noopener">Dalia Uscanga</a>, Jesús Hernández</div>
         <div class="field"><b>Muestra</b>n = 1,099</div>
         <div class="field"><b>Método</b>Regresión logística</div>
       </div>
@@ -491,9 +564,16 @@
 </section>
 
 <footer>
-  <div class="wrap">
-    <p>Portafolio de evidencias técnicas · Ingeniería en Ciencia de Datos, Facultad de Estadística e Informática, Universidad Veracruzana, Xalapa.</p>
-    <p class="foot-edit">Agrega aquí tu correo, LinkedIn o GitHub cuando quieras publicarlo.</p>
+  <div class="wrap footer-grid">
+    <div>
+      <p>Portafolio de evidencias técnicas · Ingeniería en Ciencia de Datos, Facultad de Estadística e Informática, Universidad Veracruzana, Xalapa.</p>
+      <p class="foot-edit"><a href="mailto:maar.angelz@gmail.com">maar.angelz@gmail.com</a> · <a href="https://github.com/angelzzz123" target="_blank" rel="noopener">github.com/angelzzz123</a></p>
+    </div>
+    <svg width="52" height="52" viewBox="0 0 26 26" aria-hidden="true" style="flex-shrink:0; opacity:0.7;">
+      <circle cx="13" cy="13" r="3" fill="#a8442b"/>
+      <circle cx="13" cy="13" r="8" fill="none" stroke="#1f5c52" stroke-width="1.6" stroke-opacity="0.6"/>
+      <circle cx="13" cy="13" r="12" fill="none" stroke="#93701f" stroke-width="1.2" stroke-dasharray="1 3" stroke-opacity="0.5"/>
+    </svg>
   </div>
 </footer>
 
